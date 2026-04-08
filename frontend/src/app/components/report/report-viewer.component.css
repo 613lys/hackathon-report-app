@@ -1,50 +1,380 @@
+/* Report Viewer - Modern Design */
+
 .report-container {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4);
 }
+
+/* Card/Section Styles */
 .section {
-  margin: 20px 0;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background: white;
+  margin: var(--space-4) 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  transition: box-shadow 0.2s ease;
 }
-select, textarea {
+
+.section:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.section:first-of-type {
+  margin-top: 0;
+}
+
+/* Auth Section - Compact header style */
+.auth-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+}
+
+.auth-section h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--gray-700);
+}
+
+.auth-section p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 14px;
+}
+
+/* Login Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+/* Form Controls */
+select, textarea, input {
   width: 100%;
-  padding: 8px;
-  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-family: inherit;
+  background: white;
+  transition: all 0.2s ease;
+  color: var(--gray-800);
 }
-button {
-  padding: 8px 16px;
-  background: #4CAF50;
-  color: white;
-  border: none;
+
+select:focus, textarea:focus, input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+select:hover, textarea:hover, input:hover {
+  border-color: var(--gray-400);
+}
+
+select {
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
 }
-button:hover {
-  background: #45a049;
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
 }
+
+/* Button Styles - Hierarchy */
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Primary Button - Main actions */
+button:not(.secondary):not(.danger):not([disabled]) {
+  background: var(--primary-600);
+  color: white;
+}
+
+button:not(.secondary):not(.danger):not([disabled]):hover {
+  background: var(--primary-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+button:not(.secondary):not(.danger):not([disabled]):active {
+  transform: translateY(0);
+}
+
+/* Secondary Button - Refresh, Back */
+button.secondary,
+.auth-section button,
+button:nth-of-type(2):not(.danger) {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+}
+
+button.secondary:hover,
+.auth-section button:hover {
+  background: var(--gray-200);
+  border-color: var(--gray-400);
+}
+
+/* Danger Button */
+button.danger,
+button[value="REJECTED"],
+select option[value="REJECTED"] {
+  background: var(--danger);
+  color: white;
+}
+
+button.danger:hover {
+  background: #dc2626;
+}
+
+/* Disabled Button */
+button[disabled] {
+  background: var(--gray-200) !important;
+  color: var(--gray-400) !important;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Button Groups */
+.section button + button {
+  margin-left: var(--space-3);
+}
+
+/* Table Styles */
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: white;
 }
+
 th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px 16px;
   text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid var(--gray-200);
 }
+
 th {
-  background: #4CAF50;
-  color: white;
-}
-.error {
-  color: red;
-  padding: 10px;
-  background: #ffe6e6;
-}
-.sql-preview {
-  background: #f5f5f5;
-  padding: 10px;
-  font-family: monospace;
-  white-space: pre-wrap;
+  background: var(--gray-50);
+  color: var(--gray-700);
+  font-weight: 600;
   font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+tr:hover td {
+  background: var(--gray-50);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+td:nth-child(3) {
+  font-weight: 500;
+}
+
+/* Status Colors - based on text content */
+td:contains("Generated"),
+td:nth-child(3):not(:contains("Submitted")):not(:contains("Approved")):not(:contains("Rejected")) {
+  color: var(--gray-600);
+}
+
+/* Checker Section Layout */
+.checker-section {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.checker-list {
+  background: var(--gray-50);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.checker-detail {
+  background: white;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.checker-detail p {
+  margin-bottom: var(--space-3);
+  font-size: 14px;
+}
+
+.checker-detail label {
+  display: block;
+  margin: var(--space-4) 0;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+/* Audit Section */
+.audit-section {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--gray-200);
+}
+
+/* Report Description */
+.report-desc {
+  background: var(--primary-50);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary-500);
+  margin: var(--space-4) 0;
+}
+
+.report-desc h3 {
+  color: var(--primary-700);
+  margin-bottom: var(--space-2);
+}
+
+.report-desc p {
+  color: var(--gray-600);
+  margin-bottom: var(--space-2);
+}
+
+/* SQL Preview */
+.sql-preview {
+  background: var(--gray-900);
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.6;
+  margin-top: var(--space-3);
+}
+
+/* Results Section */
+.result {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.result h3 {
+  color: var(--gray-800);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* Alert/Info Messages */
+.info {
+  background: var(--info-light);
+  color: var(--primary-700);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  margin-top: var(--space-3);
+  font-size: 14px;
+  border-left: 4px solid var(--info);
+}
+
+.error {
+  background: var(--danger-light);
+  color: var(--danger);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  margin-top: var(--space-3);
+  font-size: 14px;
+  border-left: 4px solid var(--danger);
+}
+
+/* Empty States */
+.section p:only-of-type,
+.checker-section > div > p:only-of-type {
+  text-align: center;
+  color: var(--gray-400);
+  padding: var(--space-8) var(--space-4);
+  font-style: italic;
+}
+
+/* Loading State */
+.section > div:first-child:contains("加载") {
+  text-align: center;
+  color: var(--gray-500);
+  padding: var(--space-8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checker-section {
+    grid-template-columns: 1fr;
+  }
+
+  .report-container {
+    padding: var(--space-3);
+  }
+
+  .section {
+    padding: var(--space-4);
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  th, td {
+    padding: 8px 12px;
+  }
+
+  button {
+    width: 100%;
+    margin: var(--space-2) 0 !important;
+    justify-content: center;
+  }
+
+  .section button + button {
+    margin-left: 0;
+  }
 }

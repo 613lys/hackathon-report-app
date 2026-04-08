@@ -37,6 +37,42 @@
     <button (click)="exportReport()" [disabled]="!selectedReport">下载报表 Excel</button>
   </div>
 
+  <div *ngIf="loading">加载中...</div>
+  
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="exportError" class="error">{{ exportError }}</div>
+  
+  <!-- 报表描述 -->
+  <div *ngIf="selectedReport" class="section report-desc">
+    <h3>报表描述</h3>
+    <p>{{ getChineseReportDescription(selectedReport.name) }}</p>
+    <p class="sql-preview">{{ selectedReport.sql }}</p>
+  </div>
+  
+  <!-- 查询结果 -->
+  <div *ngIf="reportData && reportData.data" class="section result">
+    <h3>查询结果 ({{ reportData.count || reportData.data.length }} 条记录)</h3>
+    
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let key of getKeys(reportData.data)">{{ key }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of reportData.data">
+          <td *ngFor="let key of getKeys(reportData.data)">{{ row[key] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- 空查询结果 -->
+  <div *ngIf="reportData && (!reportData.data || reportData.data.length === 0)" class="section result" style="background: #fff3cd; padding: 10px;">
+    <h3>空查询结果</h3>
+    <p>报表已执行但未返回数据</p>
+  </div>
+
   <!-- Maker 视角：当前报表运行状态与提交审批 -->
   <div *ngIf="authService.getCurrentUser()?.role?.includes('MAKER') && selectedReport && currentRun" class="section">
     <h2>当前报表运行状态</h2>
@@ -125,41 +161,6 @@
     </table>
   </div>
   
-  <div *ngIf="loading">加载中...</div>
-  
-  <div *ngIf="error" class="error">{{ error }}</div>
-  <div *ngIf="exportError" class="error">{{ exportError }}</div>
-  
-  <div *ngIf="selectedReport" class="report-desc">
-    <h3>报表描述</h3>
-    <p>{{ getChineseReportDescription(selectedReport.name) }}</p>
-    <p class="sql-preview">{{ selectedReport.sql }}</p>
-  </div>
-  
-  <!-- Report data display -->
-  <div *ngIf="reportData && reportData.data" class="result">
-    <h3>查询结果 ({{ reportData.count || reportData.data.length }} 条记录)</h3>
-    
-    <table>
-      <thead>
-        <tr>
-          <th *ngFor="let key of getKeys(reportData.data)">{{ key }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of reportData.data">
-          <td *ngFor="let key of getKeys(reportData.data)">{{ row[key] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <!-- If no data but reportData exists -->
-  <div *ngIf="reportData && (!reportData.data || reportData.data.length === 0)" class="result" style="background: #fff3cd; padding: 10px;">
-    <h3>空查询结果</h3>
-    <p>报表已执行但未返回数据</p>
-  </div>
-
   <!-- Checker 视角：待审批报表列表和审批操作 -->
   <div class="section" *ngIf="authService.isLoggedIn() && authService.getCurrentUser()?.role?.includes('CHECKER')">
     <h2>待审批报表</h2>
