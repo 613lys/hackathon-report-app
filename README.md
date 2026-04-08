@@ -90,3 +90,22 @@ This document outlines the five project topics available for this hackathon. Eac
 - **API Testing:** Ensure all Backend Service APIs function correctly and return expected results
 
 **Focus Areas:** System reliability, code correctness, API contract validation
+
+---
+
+## Backend 测试执行指引
+
+本仓库新增了覆盖单测、压测、API 测试的统一方案：
+
+- `./backend/gradlew test`：运行所有 JUnit 单元测试，依赖 `src/test/java` 与 `src/test/resources/fixtures` 中的夹具。
+- `./backend/gradlew stressTest -Dstress.virtualUsers=50 -Dstress.iterations=3`：在随机端口启动 Spring Boot 应用，模拟 Maker/Checker 高并发流程，并在阈值超出时失败构建。
+- `./backend/gradlew apiTest -DapiBaseUrl=http://localhost:8080`：通过 RestAssured 执行认证、报表、报表运行及审计接口的正负向用例。
+- `./backend/gradlew jacocoTestReport jacocoTestCoverageVerification`：生成 Jacoco 报告并校验 80% 行 / 70% 分支覆盖率。
+
+测试资产位于：
+
+- `backend/src/test/java`：单测、仓储测试及夹具工厂。
+- `backend/src/stressTest/java`：压测场景（使用 `ReportWorkflowStressTest`）。
+- `backend/src/apiTest/java`：API 回归用例（`ReportApiTest`）。
+
+详情请参考 OpenSpec 变更 `backend-testing-suite` 下的 proposal/design/specs/tasks 文件。
