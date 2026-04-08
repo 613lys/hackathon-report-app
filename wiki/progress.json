@@ -1,0 +1,30 @@
+{
+  "scale": "medium",
+  "total": 21,
+  "completed": [
+    "index",
+    "architecture",
+    "getting-started",
+    "doc-map",
+    "后端/_index",
+    "前端/_index",
+    "后端/report-controller",
+    "后端/report-run-controller",
+    "后端/report-service",
+    "后端/report-run-service",
+    "后端/report-excel-export-service",
+    "后端/security",
+    "api/report-api",
+    "api/auth-api",
+    "前端/report-viewer",
+    "前端/report-run-flow",
+    "前端/auth-stack",
+    "前端/report-viewer-component",
+    "前端/report-run-flow-component",
+    "前端/report-service",
+    "数据库/report-config-sql",
+    "数据库/_index"
+  ],
+  "pending": [],
+  "current_batch": 2
+}
