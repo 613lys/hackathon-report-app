@@ -1,0 +1,48 @@
+{
+  "users": {
+    "maker": {
+      "id": 1001,
+      "username": "maker_fixture",
+      "password": "hashed-maker",
+      "role": "MAKER"
+    },
+    "checker": {
+      "id": 1002,
+      "username": "checker_fixture",
+      "password": "hashed-checker",
+      "role": "CHECKER"
+    }
+  },
+  "reports": {
+    "baseline": {
+      "id": 2001,
+      "name": "Baseline Report",
+      "sql": "SELECT 1",
+      "description": "用于单测的基线报表"
+    }
+  },
+  "reportRuns": {
+    "generated": {
+      "id": 3001,
+      "reportId": 2001,
+      "reportName": "Baseline Report",
+      "status": "Generated",
+      "makerUsername": "maker_fixture",
+      "generatedAt": "2024-01-01T10:00:00",
+      "parametersJson": null,
+      "resultSnapshot": null
+    },
+    "submitted": {
+      "id": 3002,
+      "reportId": 2001,
+      "reportName": "Baseline Report",
+      "status": "Submitted",
+      "makerUsername": "maker_fixture",
+      "checkerUsername": null,
+      "generatedAt": "2024-01-01T10:05:00",
+      "submittedAt": "2024-01-01T10:10:00",
+      "parametersJson": null,
+      "resultSnapshot": null
+    }
+  }
+}

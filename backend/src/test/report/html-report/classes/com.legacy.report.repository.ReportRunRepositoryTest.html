@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ReportRunRepositoryTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ReportRunRepositoryTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.legacy.report.repository.html">com.legacy.report.repository</a> &gt; ReportRunRepositoryTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.931s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">findByCheckerUsernameOrderByDecidedAtDesc_returnsLatestDecisionFirst()</td>
+<td class="success">0.017s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">findByMakerUsernameOrderByGeneratedAtDesc_returnsLatestFirst()</td>
+<td class="success">0.874s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">findByStatusOrderBySubmittedAtAsc_returnsChronologicalList()</td>
+<td class="success">0.040s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>15:26:00.680 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.legacy.report.repository.ReportRunRepositoryTest]: ReportRunRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:26:00.880 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.legacy.report.ReportApplication for test class com.legacy.report.repository.ReportRunRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-04-08T15:26:01.668+08:00  INFO 37756 --- [    Test worker] c.l.r.r.ReportRunRepositoryTest          : Starting ReportRunRepositoryTest using Java 17.0.18 with PID 37756 (started by Administrator in C:\Users\Administrator\Downloads\hackathon\hackathon-report-app-backend-test\backend)
+2026-04-08T15:26:01.670+08:00  INFO 37756 --- [    Test worker] c.l.r.r.ReportRunRepositoryTest          : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-04-08T15:26:02.490+08:00  INFO 37756 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-08T15:26:02.582+08:00  INFO 37756 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 3 JPA repository interfaces.
+2026-04-08T15:26:02.646+08:00  INFO 37756 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2026-04-08T15:26:02.895+08:00  INFO 37756 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:55932c7c-8515-4a05-9f19-889875c24a27;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2026-04-08T15:26:03.528+08:00  INFO 37756 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-08T15:26:03.822+08:00  INFO 37756 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-04-08T15:26:03.900+08:00  INFO 37756 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-08T15:26:04.307+08:00  INFO 37756 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-08T15:26:05.768+08:00  INFO 37756 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: create table report_audit_event (id bigint generated by default as identity, actor_role varchar(255), actor_username varchar(255) not null, comment clob, event_time timestamp(6) not null, event_type varchar(32) not null, report_id bigint not null, report_run_id bigint not null, primary key (id))
+Hibernate: create table report_run (id bigint generated by default as identity, checker_username varchar(255), decided_at timestamp(6), generated_at timestamp(6) not null, maker_username varchar(255) not null, parameters_json clob, report_id bigint not null, report_name varchar(255) not null, result_snapshot clob, status varchar(32) not null, submitted_at timestamp(6), version bigint, primary key (id))
+Hibernate: create table users (id bigint generated by default as identity, password varchar(255), role varchar(255), username varchar(255), primary key (id))
+2026-04-08T15:26:05.831+08:00  INFO 37756 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-08T15:26:06.358+08:00  INFO 37756 --- [    Test worker] c.l.r.r.ReportRunRepositoryTest          : Started ReportRunRepositoryTest in 5.338 seconds (process running for 7.289)
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select rr1_0.id,rr1_0.checker_username,rr1_0.decided_at,rr1_0.generated_at,rr1_0.maker_username,rr1_0.parameters_json,rr1_0.report_id,rr1_0.report_name,rr1_0.result_snapshot,rr1_0.status,rr1_0.submitted_at,rr1_0.version from report_run rr1_0 where rr1_0.maker_username=? order by rr1_0.generated_at desc
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: update report_run set checker_username=?,decided_at=?,generated_at=?,maker_username=?,parameters_json=?,report_id=?,report_name=?,result_snapshot=?,status=?,submitted_at=?,version=? where id=? and version=?
+Hibernate: update report_run set checker_username=?,decided_at=?,generated_at=?,maker_username=?,parameters_json=?,report_id=?,report_name=?,result_snapshot=?,status=?,submitted_at=?,version=? where id=? and version=?
+Hibernate: select rr1_0.id,rr1_0.checker_username,rr1_0.decided_at,rr1_0.generated_at,rr1_0.maker_username,rr1_0.parameters_json,rr1_0.report_id,rr1_0.report_name,rr1_0.result_snapshot,rr1_0.status,rr1_0.submitted_at,rr1_0.version from report_run rr1_0 where rr1_0.status=? order by rr1_0.submitted_at
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into report_run (checker_username,decided_at,generated_at,maker_username,parameters_json,report_id,report_name,result_snapshot,status,submitted_at,version,id) values (?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: update report_run set checker_username=?,decided_at=?,generated_at=?,maker_username=?,parameters_json=?,report_id=?,report_name=?,result_snapshot=?,status=?,submitted_at=?,version=? where id=? and version=?
+Hibernate: update report_run set checker_username=?,decided_at=?,generated_at=?,maker_username=?,parameters_json=?,report_id=?,report_name=?,result_snapshot=?,status=?,submitted_at=?,version=? where id=? and version=?
+Hibernate: select rr1_0.id,rr1_0.checker_username,rr1_0.decided_at,rr1_0.generated_at,rr1_0.maker_username,rr1_0.parameters_json,rr1_0.report_id,rr1_0.report_name,rr1_0.result_snapshot,rr1_0.status,rr1_0.submitted_at,rr1_0.version from report_run rr1_0 where rr1_0.checker_username=? order by rr1_0.decided_at desc
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.6</a> at 2026年4月8日 下午3:26:10</p>
+</div>
+</div>
+</body>
+</html>
