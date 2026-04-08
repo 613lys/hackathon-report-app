@@ -2,6 +2,8 @@ package com.legacy.report.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.legacy.report.config.ReportExecutionProperties.ExecutionMode;
+import com.legacy.report.dto.ReportContext;
 import com.legacy.report.model.Report;
 import com.legacy.report.model.ReportAuditEvent;
 import com.legacy.report.model.ReportRun;
@@ -45,6 +47,9 @@ public class ReportRunService {
     @Autowired
     private ReportAuditEventRepository reportAuditEventRepository;
 
+    @Autowired
+    private ReportExecutionManager reportExecutionManager;
+
     private Counter generatedCounter;
     private Counter submittedCounter;
     private Counter approvedCounter;
@@ -85,8 +90,10 @@ public class ReportRunService {
 
         logger.info("event=report_run_execute_start reportId={} maker={}", reportId, currentUser.getUsername());
 
-        // 先执行报表，保持原有行为
-        List<Map<String, Object>> data = reportService.runReport(report.getSql());
+        ReportContext context = new ReportContext(currentUser);
+        ExecutionMode executionMode = reportExecutionManager.getExecutionMode(reportId);
+
+        List<Map<String, Object>> data = reportExecutionManager.execute(reportId, context);
 
         // 创建 ReportRun 记录
         ReportRun run = new ReportRun();
@@ -96,6 +103,7 @@ public class ReportRunService {
         run.setMakerUsername(currentUser.getUsername());
         run.setGeneratedAt(LocalDateTime.now());
         run.setParametersJson(null); // 当前 execute 接口没有参数，后续可扩展
+        run.setExecutionMode(executionMode.name());
 
         try {
             String snapshot = objectMapper.writeValueAsString(data);
@@ -263,5 +271,25 @@ public class ReportRunService {
         // 只要是已登录用户即可查看指定 run 的审计轨迹
         currentUserService.getCurrentUserOrThrow();
         return reportAuditEventRepository.findByReportRunIdOrderByEventTimeAsc(reportRunId);
+    }
+
+    public List<Map<String, Object>> getRunSnapshotData(Long runId) {
+        currentUserService.getCurrentUserOrThrow();
+
+        ReportRun run = reportRunRepository.findById(runId)
+                .orElseThrow(() -> new RuntimeException("报表运行实例不存在"));
+
+        if (run.getResultSnapshot() == null || run.getResultSnapshot().isBlank()) {
+            throw new RuntimeException("该报表运行实例没有保存结果快照");
+        }
+
+        try {
+            com.fasterxml.jackson.databind.JavaType type = objectMapper.getTypeFactory()
+                    .constructCollectionType(List.class, Map.class);
+            return objectMapper.readValue(run.getResultSnapshot(), type);
+        } catch (JsonProcessingException e) {
+            logger.warn("Failed to parse result snapshot for run {}", runId, e);
+            throw new RuntimeException("解析报表结果快照失败");
+        }
     }
 }

@@ -56,6 +56,10 @@ public class ReportRun {
     @Column(name = "result_snapshot")
     private String resultSnapshot;
 
+    // 执行模式：SQL / JAVA / DUAL（用于追踪迁移进度和审计）
+    @Column(name = "execution_mode", length = 16)
+    private String executionMode;
+
     public Long getId() {
         return id;
     }
@@ -150,5 +154,13 @@ public class ReportRun {
 
     public void setResultSnapshot(String resultSnapshot) {
         this.resultSnapshot = resultSnapshot;
+    }
+
+    public String getExecutionMode() {
+        return executionMode;
+    }
+
+    public void setExecutionMode(String executionMode) {
+        this.executionMode = executionMode;
     }
 }

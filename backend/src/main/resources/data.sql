@@ -111,7 +111,7 @@ INSERT INTO report_config (name, sql, description) VALUES
 -- Report 7: Monthly Revenue Trend Analysis
 INSERT INTO report_config (name, sql, description) VALUES 
 ('Monthly Revenue Trend Analysis',
- 'SELECT t.transaction_date as month, COUNT(t.id) as transaction_count, SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) as total_income, SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END) as total_expense FROM transaction t WHERE t.status = ''SUCCESS'' GROUP BY t.transaction_date ORDER BY t.transaction_date',
+ 'SELECT t.transaction_date as `month`, COUNT(t.id) as transaction_count, SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) as total_income, SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END) as total_expense FROM transaction t WHERE t.status = ''SUCCESS'' GROUP BY t.transaction_date ORDER BY t.transaction_date',
  '月度收入趋势分析 - 显示收入、支出和交易计数的月度收入趋势分析');
 
 -- Report 8: Order Fulfillment Analysis
@@ -141,7 +141,7 @@ INSERT INTO report_config (name, sql, description) VALUES
 -- Report 12: Financial Health Scorecard
 INSERT INTO report_config (name, sql, description) VALUES 
 ('Financial Health Scorecard',
- 'SELECT ''Total Revenue'' as metric, SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) as value FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Total Expenses'', SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Net Profit'', (SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) - SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END)) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Active Customers'', COUNT(DISTINCT customer_id) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Average Transaction Value'', AVG(amount) FROM transaction t WHERE t.status = ''SUCCESS''',
+ 'SELECT ''Total Revenue'' as metric, SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) as `value` FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Total Expenses'', SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Net Profit'', (SUM(CASE WHEN t.type = ''INCOME'' THEN t.amount ELSE 0 END) - SUM(CASE WHEN t.type = ''EXPENSE'' THEN t.amount ELSE 0 END)) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Active Customers'', COUNT(DISTINCT customer_id) FROM transaction t WHERE t.status = ''SUCCESS'' UNION ALL SELECT ''Average Transaction Value'', AVG(amount) FROM transaction t WHERE t.status = ''SUCCESS''',
  '财务健康仪表板 - 显示收入、支出、利润和客户指标等关键绩效指标的高管财务健康仪表板');
 
 -- Legacy report (marked as deleted)

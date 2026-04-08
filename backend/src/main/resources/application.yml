@@ -32,6 +32,23 @@ report:
   templates:
     # Base directory for Excel report templates under classpath resources
     base-path: classpath:report-templates
+  execution:
+    # Default execution mode: SQL (legacy), JAVA (calculator), DUAL (both with comparison)
+    mode: SQL
+    # Per-report overrides: report ID -> mode
+    overrides:
+      "1": DUAL
+      "2": DUAL
+      "3": DUAL
+      "4": DUAL
+      "5": DUAL
+      "6": DUAL
+      "7": DUAL
+      "8": DUAL
+      "9": DUAL
+      "10": DUAL
+      "11": DUAL
+      "12": DUAL
 
 management:
   endpoints:

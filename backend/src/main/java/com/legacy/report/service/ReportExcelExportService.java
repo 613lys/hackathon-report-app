@@ -3,6 +3,7 @@ package com.legacy.report.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.legacy.report.dto.ReportContext;
 import com.legacy.report.exception.ReportExportException;
 import com.legacy.report.model.Report;
 import com.legacy.report.model.ReportRun;
@@ -51,6 +52,9 @@ public class ReportExcelExportService {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Autowired
+    private ReportExecutionManager reportExecutionManager;
+
     public byte[] exportLatestByReportId(Long reportId) {
         User currentUser = currentUserService.getCurrentUserOrThrow();
         currentUserService.requireRole(currentUser, "MAKER");
@@ -60,7 +64,7 @@ public class ReportExcelExportService {
             throw new ReportExportException("报表不存在");
         }
 
-        List<Map<String, Object>> data = reportService.runReport(report.getSql());
+        List<Map<String, Object>> data = executeThroughManager(reportId, currentUser);
 
         Map<String, Object> meta = new HashMap<>();
         meta.put("reportId", report.getId());
@@ -99,10 +103,10 @@ public class ReportExcelExportService {
                 data = objectMapper.readValue(run.getResultSnapshot(), type);
             } catch (JsonProcessingException e) {
                 logger.warn("Failed to parse result snapshot for run {}. Fallback to re-execute SQL.", runId, e);
-                data = reportService.runReport(report.getSql());
+                data = executeThroughManager(report.getId(), currentUser);
             }
         } else {
-            data = reportService.runReport(report.getSql());
+            data = executeThroughManager(report.getId(), currentUser);
         }
 
         Map<String, Object> meta = new HashMap<>();
@@ -151,5 +155,10 @@ public class ReportExcelExportService {
             logger.error("Failed to render Excel template for reportId={}", reportId, e);
             throw new ReportExportException("生成报表导出文件失败", e);
         }
+    }
+
+    private List<Map<String, Object>> executeThroughManager(Long reportId, User currentUser) {
+        ReportContext context = new ReportContext(currentUser);
+        return reportExecutionManager.execute(reportId, context);
     }
 }

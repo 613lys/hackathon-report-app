@@ -76,6 +76,11 @@ public class ReportRunController {
         return reportRunService.getAuditEventsForRun(id);
     }
 
+    @GetMapping("/{id}/data")
+    public List<Map<String, Object>> getRunData(@PathVariable Long id) {
+        return reportRunService.getRunSnapshotData(id);
+    }
+
     @GetMapping("/{id}/export")
     public ResponseEntity<byte[]> exportRun(@PathVariable Long id) {
         byte[] body = reportExcelExportService.exportByRunId(id);
